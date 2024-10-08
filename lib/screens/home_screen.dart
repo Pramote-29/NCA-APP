@@ -1,7 +1,5 @@
 import 'package:account/provider/transaction_provider.dart';
 import 'package:account/screens/edit_screen.dart';
-import 'package:account/screens/edit_screen.dart.bak';
-import 'package:account/screens/form_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
@@ -18,9 +16,23 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor:const Color.fromARGB(255, 147, 145, 145),
         appBar: AppBar(
-          backgroundColor: Theme.of(context).colorScheme.primary,
-          title: const Text("แอพบัญชี"),
+          backgroundColor: const Color.fromARGB(255, 0, 0, 0),
+          title: RichText(
+          text: TextSpan(
+            children: [
+              TextSpan(text: 'N', style: TextStyle(fontSize: 25,
+              fontWeight: FontWeight.bold,color: const Color.fromARGB(255, 9, 37, 128))),
+              TextSpan(text: 'B', style: TextStyle(fontSize: 25,
+              fontWeight: FontWeight.bold,color: Colors.white)),
+              TextSpan(text: 'A', style: TextStyle(fontSize: 25,
+              fontWeight: FontWeight.bold,color: Colors.red)),
+              TextSpan(text: ' CRUD APP', style: TextStyle(fontSize: 25,
+              fontWeight: FontWeight.bold,color: Colors.red)),
+            ],
+          ),
+        ),
           actions: [
             IconButton(
               icon: const Icon(Icons.exit_to_app),
@@ -34,8 +46,8 @@ class _HomeScreenState extends State<HomeScreen> {
           builder: (context, TransactionProvider provider, Widget? child) {
             if (provider.transactions.isEmpty) {
               return const Center(
-                child: Text('ไม่มีรายการ'),
-              );
+                 child: Text('ไม่มีรายการที่เพิ่มเข้ามา', style: TextStyle(fontSize: 18)),
+            );
             } else {
               return ListView.builder(
                 itemCount: provider.transactions.length,
@@ -78,6 +90,7 @@ class _HomeScreenState extends State<HomeScreen> {
             }
           },
         )
+        
         // This trailing comma makes auto-formatting nicer for build methods.
         );
   }

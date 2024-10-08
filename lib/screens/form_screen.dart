@@ -42,6 +42,7 @@ class _FormScreenState extends State<FormScreen> {
                     if (str!.isEmpty) {
                       return 'กรุณากรอกข้อมูล';
                     }
+                    return null;
                   },
                 ),
                 TextFormField(
@@ -53,12 +54,13 @@ class _FormScreenState extends State<FormScreen> {
                   validator: (String? input) {
                     try {
                       double amount = double.parse(input!);
-                      if (amount < 0) {
+                      if (amount <= 0) {
                         return 'กรุณากรอกข้อมูลมากกว่า 0';
                       }
                     } catch (e) {
                       return 'กรุณากรอกข้อมูลเป็นตัวเลข';
                     }
+                    return null;
                   },
                 ),
                 TextButton(
@@ -82,7 +84,7 @@ class _FormScreenState extends State<FormScreen> {
                               Navigator.push(context, MaterialPageRoute(
                                 fullscreenDialog: true,
                                 builder: (context){
-                                  return MyHomePage();
+                                  return const MyHomePage();
                                 }
                               ));
                             }

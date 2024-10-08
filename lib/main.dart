@@ -21,9 +21,9 @@ class MyApp extends StatelessWidget {
         }),
       ],
       child: MaterialApp(
-        title: 'Flutter Demo',
+        title: 'NBA CRUD APP',
         theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+          colorScheme: ColorScheme.fromSeed(seedColor: const Color.fromARGB(255, 9, 29, 120)),
           useMaterial3: true,
         ),
         home: const MyHomePage(),
@@ -52,15 +52,15 @@ class _MyHomePageState extends State<MyHomePage> {
     return DefaultTabController(
         length: 2,
         child: Scaffold(
-          body: TabBarView(
+          body: const TabBarView(
             children: [
               HomeScreen(),
               FormScreen(),
             ],
           ),
-          bottomNavigationBar: TabBar(
+         bottomNavigationBar: TabBar(
             tabs: [
-              Tab(text: "รายการธุรกรรม", icon: Icon(Icons.list),),
+              Tab(text: "รายการที่เพิ่มเข้ามา", icon: Icon(Icons.list),),
               Tab(text: "เพิ่มข้อมูล", icon: Icon(Icons.add),),
             ],
           ),

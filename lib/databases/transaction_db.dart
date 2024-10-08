@@ -21,7 +21,7 @@ class TransactionDB{
   }
 
   Future<int> insertDatabase(Transactions statement) async{
-    var db = await this.openDatabase();
+    var db = await openDatabase();
     var store = intMapStoreFactory.store('expense');
 
     var keyID  = store.add(db, {
@@ -34,7 +34,7 @@ class TransactionDB{
   }
 
   Future<List<Transactions>> loadAllData()async {
-    var db = await this.openDatabase();
+    var db = await openDatabase();
     var store = intMapStoreFactory.store('expense');
     var snapshot = await store.find(db, finder: Finder(sortOrders: [SortOrder(Field.key, false)]));
     List<Transactions> transactions = [];
@@ -50,7 +50,7 @@ class TransactionDB{
     return transactions;
   }
   deleteDatabase(int? index) async{
-    var db = await this.openDatabase();
+    var db = await openDatabase();
     var store = intMapStoreFactory.store('expense');
     await store.delete(db, finder: Finder(filter: Filter.equals(Field.key, index)));
     // Delete from table... where rowId = index
@@ -58,7 +58,7 @@ class TransactionDB{
   }
 
   updateDatabase(Transactions statement) async{
-    var db = await this.openDatabase();
+    var db = await openDatabase();
     var store = intMapStoreFactory.store('expense');
     var filter = Finder(filter: Filter.equals(Field.key, statement.keyID));
     var result = store.update(db, finder: filter,  {
