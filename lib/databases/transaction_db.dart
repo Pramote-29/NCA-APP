@@ -25,9 +25,9 @@ class TransactionDB{
     var store = intMapStoreFactory.store('expense');
 
     var keyID  = store.add(db, {
-      "title": statement.title,
-      "amount": statement.amount,
-      "date": statement.date.toIso8601String()
+      "teamname": statement.teamname,
+      "playername": statement.playername,
+      "performance": statement.performance
     });
     db.close();
     return keyID;
@@ -41,9 +41,9 @@ class TransactionDB{
     for (var record in snapshot) {
       transactions.add(Transactions(
         keyID: record.key,
-        title: record['title'].toString(),
-        amount: double.parse(record['amount'].toString()),
-        date: DateTime.parse(record['date'].toString())
+        teamname: record['teamname'].toString(),
+        playername: record['playername'].toString(),
+        performance: record['performance'].toString()
       ));
     }
     db.close();
@@ -62,9 +62,10 @@ class TransactionDB{
     var store = intMapStoreFactory.store('expense');
     var filter = Finder(filter: Filter.equals(Field.key, statement.keyID));
     var result = store.update(db, finder: filter,  {
-      "title": statement.title,
-      "amount": statement.amount,
-      "date": statement.date.toIso8601String()
+      "teamname": statement.teamname,
+      "playername": statement.playername,
+      "performance": statement.performance
+
     });
     db.close();
     print('update result: $result');

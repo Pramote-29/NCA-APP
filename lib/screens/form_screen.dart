@@ -17,9 +17,9 @@ class FormScreen extends StatefulWidget {
 class _FormScreenState extends State<FormScreen> {
   final formKey = GlobalKey<FormState>();
 
-  final titleController = TextEditingController();
-  
-  final amountController = TextEditingController();
+  final teamnameController = TextEditingController();
+  final playernameController = TextEditingController();
+  final perforController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -34,30 +34,37 @@ class _FormScreenState extends State<FormScreen> {
               children: [
                 TextFormField(
                   decoration: const InputDecoration(
-                    labelText: 'ชื่อรายการ',
+                    labelText: 'Teamname',
                   ),
                   autofocus: false,
-                  controller: titleController,
+                  controller: teamnameController,
                   validator: (String? str) {
                     if (str!.isEmpty) {
-                      return 'กรุณากรอกข้อมูล';
+                      return 'Please enter teamname';
                     }
                   },
                 ),
                 TextFormField(
                   decoration: const InputDecoration(
-                    labelText: 'จำนวนเงิน',
+                    labelText: 'Playername',
                   ),
-                  keyboardType: TextInputType.number,
-                  controller: amountController,
-                  validator: (String? input) {
-                    try {
-                      double amount = double.parse(input!);
-                      if (amount < 0) {
-                        return 'กรุณากรอกข้อมูลมากกว่า 0';
-                      }
-                    } catch (e) {
-                      return 'กรุณากรอกข้อมูลเป็นตัวเลข';
+                  autofocus: false,
+                  controller: playernameController,
+                  validator: (String? str) {
+                    if (str!.isEmpty) {
+                      return 'Please enter Playername';
+                    }
+                  },
+                ),
+                TextFormField(
+                  decoration: const InputDecoration(
+                    labelText: 'Performance',
+                  ),
+                  autofocus: false,
+                  controller: perforController,
+                  validator: (String? str) {
+                    if (str!.isEmpty) {
+                      return 'Please enter performance';
                     }
                   },
                 ),
@@ -69,9 +76,10 @@ class _FormScreenState extends State<FormScreen> {
                               // create transaction data object
                               var statement = Transactions(
                                   keyID: null,
-                                  title: titleController.text,
-                                  amount: double.parse(amountController.text),
-                                  date: DateTime.now()
+                                  teamname: teamnameController.text,
+                                  playername: playernameController.text,
+                                  performance: perforController.text 
+
                                   );
                             
                               // add transaction data object to provider

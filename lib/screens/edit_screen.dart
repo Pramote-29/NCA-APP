@@ -18,17 +18,18 @@ class EditScreen extends StatefulWidget {
 class _EditScreenState extends State<EditScreen> {
   final formKey = GlobalKey<FormState>();
 
-  final titleController = TextEditingController();
-
-  final amountController = TextEditingController();
+  final teamnameController = TextEditingController();
+  final playernameController = TextEditingController();
+  final perforController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    titleController.text = widget.statement.title;
-    amountController.text = widget.statement.amount.toString();
+    teamnameController.text = widget.statement.teamname;
+    playernameController.text = widget.statement.playername;
+    perforController.text = widget.statement.performance;
     return Scaffold(
         appBar: AppBar(
-          title: const Text('แบบฟอร์มแก้ไขข้อมูล'),
+          title: const Text('แบบฟอร์มแก้ไขข้อมูล',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 30),),
         ),
         body: Form(
             key: formKey,
@@ -39,7 +40,7 @@ class _EditScreenState extends State<EditScreen> {
                     labelText: 'ชื่อรายการ',
                   ),
                   autofocus: false,
-                  controller: titleController,
+                  controller: teamnameController,
                   validator: (String? str) {
                     if (str!.isEmpty) {
                       return 'กรุณากรอกข้อมูล';
@@ -48,18 +49,25 @@ class _EditScreenState extends State<EditScreen> {
                 ),
                 TextFormField(
                   decoration: const InputDecoration(
-                    labelText: 'จำนวนเงิน',
+                    labelText: 'ชื่อรายการ',
                   ),
-                  keyboardType: TextInputType.number,
-                  controller: amountController,
-                  validator: (String? input) {
-                    try {
-                      double amount = double.parse(input!);
-                      if (amount < 0) {
-                        return 'กรุณากรอกข้อมูลมากกว่า 0';
-                      }
-                    } catch (e) {
-                      return 'กรุณากรอกข้อมูลเป็นตัวเลข';
+                  autofocus: false,
+                  controller: playernameController,
+                  validator: (String? str) {
+                    if (str!.isEmpty) {
+                      return 'กรุณากรอกข้อมูล';
+                    }
+                  },
+                ),
+                TextFormField(
+                  decoration: const InputDecoration(
+                    labelText: 'ชื่อรายการ',
+                  ),
+                  autofocus: false,
+                  controller: perforController,
+                  validator: (String? str) {
+                    if (str!.isEmpty) {
+                      return 'กรุณากรอกข้อมูล';
                     }
                   },
                 ),
@@ -71,9 +79,9 @@ class _EditScreenState extends State<EditScreen> {
                               // create transaction data object
                               var statement = Transactions(
                                   keyID: widget.statement.keyID,
-                                  title: titleController.text,
-                                  amount: double.parse(amountController.text),
-                                  date: DateTime.now()
+                                  teamname: teamnameController.text,
+                                  playername: playernameController.text,
+                                  performance: perforController.text
                                   );
                             
                               // add transaction data object to provider

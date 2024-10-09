@@ -71,7 +71,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
                 Tab(
                   text: "เพิ่มข้อมูล",
-                  icon: Icon(Icons.list),
+                  icon: Icon(Icons.add),
                 )
               ],
             ),

@@ -1,13 +1,14 @@
 class Transactions {
   int? keyID;
-  final String title;
-  final double amount;
-  final DateTime date;
+    final String teamname;
+    final String playername;
+    final String performance;
+
 
   Transactions({
     this.keyID,
-    required this.title,
-    required this.amount,
-    required this.date,
+    required this.teamname,
+    required this.playername,
+    required this.performance,
   });
 }
