@@ -1,42 +1,41 @@
 import 'package:account/databases/transaction_db.dart';
 import 'package:flutter/foundation.dart';
-import 'package:account/models/transactions.dart';
+import 'package:account/models/transactios.dart'; // เปลี่ยนชื่อจาก transactions.dart เป็น team.dart
 
-class TransactionProvider with ChangeNotifier {
-  List<Transactions> transactions = [];
+class TeamProvider with ChangeNotifier {
+  List<Team> teams = [];
 
-  List<Transactions> getTransaction() {
-    return transactions;
+  List<Team> getTeams() {
+    return teams;
   }
 
-  void initData() async{
-    var db = TransactionDB(dbName: 'transactions.db');
-    transactions = await db.loadAllData();
-    print(transactions);
+  void initData() async {
+    var db = TransactionDB(dbName: 'teams.db'); // เปลี่ยนชื่อฐานข้อมูลให้เหมาะสมกับข้อมูลทีม
+    teams = await db.loadAllData();
+    print(teams);
     notifyListeners();
   }
 
-  void addTransaction(Transactions transaction) async{
-    var db = TransactionDB(dbName: 'transactions.db');
-    var keyID = await db.insertDatabase(transaction);
-    transactions = await db.loadAllData();
-    print(transactions);
+  void addTeam(Team team) async {
+    var db = TransactionDB(dbName: 'teams.db');
+    var keyID = await db.insertDatabase(team);
+    teams = await db.loadAllData();
+    print(teams);
     notifyListeners();
   }
 
-  void deleteTransaction(int? index) async{
+  void deleteTeam(int? index) async {
     print('delete index: $index');
-    var db = TransactionDB(dbName: 'transactions.db');
+    var db = TransactionDB(dbName: 'teams.db');
     await db.deleteDatabase(index);
-    transactions = await db.loadAllData();
-    notifyListeners(); 
+    teams = await db.loadAllData();
+    notifyListeners();
   }
 
-  void updateTransaction(Transactions transaction) async{
-    // print('update index: ${transaction.keyID}');
-    var db = TransactionDB(dbName: 'transactions.db');
-    await db.updateDatabase(transaction);
-    transactions = await db.loadAllData();
+  void updateTeam(Team team) async {
+    var db = TransactionDB(dbName: 'teams.db');
+    await db.updateDatabase(team);
+    teams = await db.loadAllData();
     notifyListeners();
   }
 }
