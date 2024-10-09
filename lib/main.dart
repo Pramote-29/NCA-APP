@@ -58,11 +58,23 @@ class _MyHomePageState extends State<MyHomePage> {
               FormScreen(),
             ],
           ),
-          bottomNavigationBar: TabBar(
-            tabs: [
-              Tab(text: "รายการธุรกรรม", icon: Icon(Icons.list),),
-              Tab(text: "เพิ่มข้อมูล", icon: Icon(Icons.add),),
-            ],
+          bottomNavigationBar: BottomAppBar(
+            color: const Color.fromARGB(255, 7, 6, 6),
+            child: TabBar(
+              labelColor: const Color.fromARGB(255, 247, 247, 247),
+              unselectedLabelColor: const Color.fromARGB(255, 148, 145, 145),
+              indicatorColor: const Color.fromARGB(255, 241, 25, 25),
+              tabs: [
+                Tab(
+                  text: "รายการทีม",
+                  icon: Icon(Icons.list),
+                ),
+                Tab(
+                  text: "เพิ่มข้อมูล",
+                  icon: Icon(Icons.list),
+                )
+              ],
+            ),
           ),
         ));
   }

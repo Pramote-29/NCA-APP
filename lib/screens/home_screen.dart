@@ -19,8 +19,46 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: Theme.of(context).colorScheme.primary,
-          title: const Text("แอพบัญชี"),
+          backgroundColor: const Color.fromARGB(255, 0, 0, 0),
+        title: RichText(
+          text: const TextSpan(
+            children: [
+              TextSpan(
+                text: 'N',
+                style: TextStyle(
+                  fontSize: 25,
+                  fontWeight: FontWeight.bold,
+                  color: Color.fromARGB(255, 9, 37, 128),
+                ),
+              ),
+              TextSpan(
+                text: 'B',
+                style: TextStyle(
+                  fontSize: 25,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+              ),
+              TextSpan(
+                text: 'A',
+                style: TextStyle(
+                  fontSize: 25,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.red,
+                ),
+              ),
+              TextSpan(
+                text: ' CRUD APP',
+                style: TextStyle(
+                  fontSize: 25,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.red,
+                ),
+              ),
+            ],
+          ),
+        ),
+          
           actions: [
             IconButton(
               icon: const Icon(Icons.exit_to_app),
