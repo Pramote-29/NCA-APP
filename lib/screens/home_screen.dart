@@ -2,6 +2,9 @@ import 'package:account/provider/transaction_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'dart:io';
+import 'package:account/models/transactions.dart'; // นำเข้าโมเดล Team
+import 'package:account/screens/edit_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -64,7 +67,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ],
       ),
-      body: Consumer<TransactionProvider>(
+      body: Consumer<TeamProvider>(
         builder: (context, provider, child) {
           if (provider.teams.isEmpty) {
             return const Center(
@@ -122,7 +125,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                         const SizedBox(height: 5),
                         Text(
-                          'ผลงาน: ${team.performance}', // ใช้ข้อมูลผลงานเป็น String ที่คุณกรอกไว้ในฟอร์ม
+                          'ผลงาน: Wins ${team.wins}, Losses ${team.losses}',
                           style: const TextStyle(
                             fontSize: 16,
                             color: Colors.white70,
@@ -133,11 +136,16 @@ class _HomeScreenState extends State<HomeScreen> {
                     trailing: IconButton(
                       icon: const Icon(Icons.delete, color: Colors.red),
                       onPressed: () {
-                        provider.deleteTeam(team.keyID!);
+                        provider.deleteTeam(team.keyID);
                       },
                     ),
                     onTap: () {
-                      // นำทางไปยังหน้าจอแก้ไขข้อมูล (ถ้ามี)
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => EditScreen(team: team),
+                        ),
+                      );
                     },
                   ),
                 );

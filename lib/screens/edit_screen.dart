@@ -1,4 +1,3 @@
-import 'package:account/main.dart';
 import 'package:account/models/transactions.dart';
 import 'package:account/provider/transaction_provider.dart';
 import 'package:flutter/material.dart';
@@ -7,7 +6,7 @@ import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 
 class EditScreen extends StatefulWidget {
-  Team team;
+  final Team team;
 
   EditScreen({super.key, required this.team});
 
@@ -129,7 +128,6 @@ class _EditScreenState extends State<EditScreen> {
                 child: const Text('แก้ไขข้อมูล'),
                 onPressed: () {
                   if (formKey.currentState!.validate()) {
-                    // แยกข้อมูล wins และ losses จาก performanceController
                     int wins = 0;
                     int losses = 0;
                     final performanceParts = performanceController.text.split(',');
@@ -141,7 +139,6 @@ class _EditScreenState extends State<EditScreen> {
                       }
                     }
 
-                    // สร้างออบเจกต์ Team ใหม่สำหรับการอัปเดต
                     var updatedTeam = Team(
                       keyID: widget.team.keyID,
                       teamName: titleController.text,
@@ -151,19 +148,13 @@ class _EditScreenState extends State<EditScreen> {
                       losses: losses,
                     );
 
-                    // อัปเดตข้อมูลผ่าน provider
-                    var provider = Provider.of<TransactionProvider>(context, listen: false);
+                    var provider = Provider.of<TeamProvider>(context, listen: false);
                     provider.updateTeam(updatedTeam);
 
-                    Navigator.push(context, MaterialPageRoute(
-                      fullscreenDialog: true,
-                      builder: (context) {
-                        return const MyHomePage();
-                      },
-                    ));
+                    Navigator.pop(context);
                   }
                 },
-              )
+              ),
             ],
           ),
         ),

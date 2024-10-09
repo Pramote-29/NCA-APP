@@ -15,11 +15,11 @@ class FormScreen extends StatefulWidget {
 
 class _FormScreenState extends State<FormScreen> {
   final formKey = GlobalKey<FormState>();
-  final titleController = TextEditingController(); // ใช้สำหรับกรอกชื่อทีม
-  final playerController = TextEditingController(); // ใช้สำหรับกรอกชื่อนักบาส
-  final performanceController = TextEditingController(); // ใช้สำหรับกรอกผลงานของทีม
+  final titleController = TextEditingController();
+  final playerController = TextEditingController();
+  final performanceController = TextEditingController();
   File? _teamImage;
-  List<String> players = []; // ลิสต์สำหรับเก็บชื่อนักบาส
+  List<String> players = [];
 
   Future<void> _pickImage() async {
     final pickedFile = await ImagePicker().pickImage(source: ImageSource.gallery);
@@ -34,7 +34,7 @@ class _FormScreenState extends State<FormScreen> {
     if (playerController.text.isNotEmpty) {
       setState(() {
         players.add(playerController.text);
-        playerController.clear(); // ล้างฟิลด์หลังจากเพิ่มชื่อ
+        playerController.clear();
       });
     }
   }
@@ -62,7 +62,6 @@ class _FormScreenState extends State<FormScreen> {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                // ช่องกรอกชื่อทีม
                 TextFormField(
                   decoration: const InputDecoration(
                     labelText: 'ชื่อทีม',
@@ -76,7 +75,6 @@ class _FormScreenState extends State<FormScreen> {
                   },
                 ),
                 const SizedBox(height: 20),
-                // แสดงรูปภาพที่เลือกหรือข้อความหากยังไม่ได้เลือก
                 _teamImage == null
                     ? const Text('ยังไม่ได้เลือกรูปภาพ')
                     : Image.file(_teamImage!, height: 100),
@@ -85,7 +83,6 @@ class _FormScreenState extends State<FormScreen> {
                   child: const Text('เลือกรูปภาพทีม'),
                 ),
                 const SizedBox(height: 20),
-                // ช่องกรอกชื่อนักบาส
                 TextFormField(
                   decoration: const InputDecoration(
                     labelText: 'ชื่อนักบาส',
@@ -97,7 +94,6 @@ class _FormScreenState extends State<FormScreen> {
                   child: const Text('เพิ่มนักบาส'),
                 ),
                 const SizedBox(height: 20),
-                // แสดงรายชื่อนักบาสที่เพิ่มเข้ามา
                 ListView.builder(
                   shrinkWrap: true,
                   itemCount: players.length,
@@ -116,7 +112,6 @@ class _FormScreenState extends State<FormScreen> {
                   },
                 ),
                 const SizedBox(height: 20),
-                // ช่องกรอกผลงานของทีม
                 TextFormField(
                   decoration: const InputDecoration(
                     labelText: 'ผลงานของทีม',
@@ -131,23 +126,20 @@ class _FormScreenState extends State<FormScreen> {
                   },
                 ),
                 const SizedBox(height: 20),
-                // ปุ่มบันทึกข้อมูล
                 TextButton(
                   child: const Text('บันทึก'),
                   onPressed: () {
                     if (formKey.currentState!.validate()) {
-                      // สร้างข้อมูลทีมใหม่
                       var team = Team(
                         keyID: null,
                         teamName: titleController.text,
                         teamImage: _teamImage?.path,
                         players: players,
-                        wins: 0, // ไม่ใช้งานในฟอร์มนี้ แต่จำเป็นสำหรับโมเดล
-                        losses: 0, // ไม่ใช้งานในฟอร์มนี้ แต่จำเป็นสำหรับโมเดล
+                        wins: 0, // แก้ไขตามการคำนวณหรือเก็บข้อมูล
+                        losses: 0, // แก้ไขตามการคำนวณหรือเก็บข้อมูล
                       );
 
-                      // เพิ่มข้อมูลทีมไปยัง provider
-                      var provider = Provider.of<TransactionProvider>(context, listen: false);
+                      var provider = Provider.of<TeamProvider>(context, listen: false);
                       provider.addTeam(team);
 
                       Navigator.push(

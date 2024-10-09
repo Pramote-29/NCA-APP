@@ -11,13 +11,12 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) {
-          return TransactionProvider();
+          return TeamProvider();
         }),
       ],
       child: MaterialApp(
@@ -42,40 +41,40 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    Provider.of<TransactionProvider>(context, listen: false).initData();
+    Provider.of<TeamProvider>(context, listen: false).initData();
   }
 
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-        length: 2,
-        child: Scaffold(
-          body: const TabBarView(
-            children: [
-              HomeScreen(),
-              FormScreen(),
-            ],
-          ),
+      length: 2,
+      child: Scaffold(
+        body: const TabBarView(
+          children: [
+            HomeScreen(),
+            FormScreen(),
+          ],
+        ),
         bottomNavigationBar: BottomAppBar(
-          color:  Color.fromARGB(255, 7, 6, 6),
+          color: const Color.fromARGB(255, 7, 6, 6),
           child: TabBar(
-            labelColor: Color.fromARGB(255, 247, 247, 247),
-            unselectedLabelColor: Color.fromARGB(255, 148, 145, 145),
-            indicatorColor: Color.fromARGB(255, 241, 25, 25),
+            labelColor: const Color.fromARGB(255, 247, 247, 247),
+            unselectedLabelColor: const Color.fromARGB(255, 148, 145, 145),
+            indicatorColor: const Color.fromARGB(255, 241, 25, 25),
             tabs: [
               Tab(
-                text:"รายการที่เพิ่มเข้ามา",
+                text: "รายการที่เพิ่มเข้ามา",
                 icon: Icon(Icons.list),
               ),
               Tab(
-                text:"เพิ่มข้อมูล",
-                icon:Icon(Icons.add)
-              )
+                text: "เพิ่มข้อมูล",
+                icon: Icon(Icons.add),
+              ),
             ],
           ),
         ),
-        ));
+      ),
+    );
   }
 }
